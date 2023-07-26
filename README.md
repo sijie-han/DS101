@@ -58,6 +58,7 @@ R **evaluated** the expression and gave us the value back. We can evaluate more 
 ```{r}
 cat("Hi engsci!")
 ```
+> Hi engsci!
 ### Here's how we assign values to a variable
 ```{r}
 a <- 5
