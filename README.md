@@ -94,6 +94,7 @@ my_abs <- function(x){
   }
 }
 cat(my_abs(-4))
+> 4
 ```
 
 
