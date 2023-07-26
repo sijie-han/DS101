@@ -1,6 +1,6 @@
 # DS101 Notes
  Instructor: Prof Michael Guerzhoy  
- Notes taken by: Skyler Han
+ Notes taken by: Skyler Han  
  ![](images.jpeg)
 # lecture 1
 - **Important resources:**  
