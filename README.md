@@ -74,6 +74,18 @@ if(n>=0){
   cat(-n)
 }
 ```
+> 25
+  
+This is the same as saying
+```R 
+n <- -25
+if(-25>=0){
+  cat(-25)
+}else{
+  cat(-(-25))
+}
+```
+> Output: 25
 ## Functions
 Functions are what we can do to simplfy the program.
 > Donâ€™t Repeat Yourself -- Andy Hunt
