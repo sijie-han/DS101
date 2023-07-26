@@ -5,7 +5,7 @@
 # lecture 1
 - **Important resources:**  
    [Course Discord: will be used for Q&A](https://discord.gg/cgdSnbbK)  
-   [SML201: a similar course taught by the same prof](http://www.cs.toronto.edu/~guerzhoy/201s19/)
+   [SML201: a similar course taught by the same prof](http://www.cs.toronto.edu/~guerzhoy/201s20/)
    ![](logo.png)
 - **What is needed for the course**  
    R + Rstudio  
