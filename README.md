@@ -284,7 +284,7 @@ cat_emo_state <- function(score){
 The function `emo_state` *computes* a value, just like our functions `f` and `g` above. For example, `emo_state(99)` evaluates to `"Hooray!"`. You can see this in the following example:
 
 ```R
-a <- emo.state(99)
+a <- emo_state(99)
 cat(a)
 ```
 > Hooray!
@@ -345,7 +345,29 @@ The `length` function gets the length of a vector. In this case, the output shou
 v <- c(2,-50,2,4)
 max(v)
 ```
-The `max` function gets the maxinum element a vector. In this case, the output should be `4`.
+The `max` function gets the maxinum element of a vector. In this case, the output should be `4`.
+
+#### unique
+```R
+v <- c(2,-1,2,2,5,1)
+unique(v)
+```
+The `unique` function will return a vector with different values(i.e. Vector that does not contain any repetitive elements)
+
+> 2 -1  5  1
+
+#### Comparing a vector `v` and a number `n`
+example: v > n
+```R
+v <- c(2,-1,2)
+v > 0
+```
+> TRUE FALSE TRUE
+
+`v>n` will do logical operations for every element in v with n.
+
+
+
 
 #### Example: How to define a function without using max?
 <details><summary>Answer
