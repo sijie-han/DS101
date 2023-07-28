@@ -394,25 +394,26 @@ pie <- TRUE
 icecream <- FALSE
 pie | icecream
 ```
-
+> TRUE
 ```R
 pie <- FALSE
 icecream <- FALSE
 pie | icecream
 ```
-
+> FALSE
 
 ```R
 pie <- TRUE
 icecream <- FALSE
 pie & icecream
 ```
-
+> FALSE
 ```R
 pie <- TRUE
 icecream <- TRUE
 pie | icecream
 ```
+> TRUE
 
 Note: this is not quite how it works in English. If I say I will have pie or icecream, and then have both, that means what I said wasn't true. But for R, the expression `pie | icecream` is TRUE. Technically, `|` is called "inclusive OR" (as opposed to the "exclusive OR" we usually mean in English.)
 
@@ -422,18 +423,18 @@ pie <- FALSE
 icecream <- TRUE
 pie | icecream
 ```
-
+> TRUE
 ```R
 pie <- FALSE
 icecream <- FALSE
 pie | icecream
 ```
-
+> FALSE
 ```R
 pie <- TRUE
 !pie
 ```
-
+> FALSE
 ### Inclusive OR and exclusive OR (XOR)
 
 So how *do* you make an expression in R that corresponds to "I will have ice cream or pie"? That is, we want to write an expression that will be `TRUE` whenever `pie` or `icecream` are true, but not both.
