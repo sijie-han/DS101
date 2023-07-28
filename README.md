@@ -307,7 +307,7 @@ a
 You will *very rarely* need to use `cat` inside functions. Outside of Precept 1, you just should not use it at all in this course.
 
 ## Vectors 
-### What is a vecotr in R?
+### What is a vector in R?
 A vector is an order collection of elements of the **same** type.  
 Here are examples of vectors in R.
 ```R
@@ -315,7 +315,7 @@ c(5,6,7)
 c("dog","cat")
 v <- c(TRUE,FALSE,TRUE,TRUE) 
 ```
-### Retrieving value of elements in a vector
+### Indexing value of elements in a vector
 We can access the value of elements in a vector by specifying the location of it.
 ```R
 v[1]
