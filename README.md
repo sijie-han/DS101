@@ -20,34 +20,34 @@
 ## Some Basic R 
 First, let's evaluate some R expressions in the console. The simplest expressions are numerics and strings:
 
-```{r}
+```R
 42
 ```
 
-```{r}
+```R
 "Hello"
 ```
 
 R simply repeats these values
 
 A more complex expression is something like `42 + 43`. Let's try this:
-```{r}
+```R
 42 + 43
 ```
 >85  
 
 R **evaluated** the expression and gave us the value back. We can evaluate more complex expressions too:
 
-```{r}
+```R
 (45 - 43) ** 3
 ```
 > 8
 ### We can also evaluate logical values
-```{r}
+```R
 5 == (4 + 1)
 ```
 >TRUE
-```{r}
+```R
 2**10 > 10**3
 ```
 >TRUE
@@ -56,12 +56,12 @@ R **evaluated** the expression and gave us the value back. We can evaluate more 
  TRUE,FALSE
 ```
 ### We can print out stuff using cat in R
-```{r}
+```R
 cat("Hi engsci!")
 ```
 > Hi engsci!
 ### Here's how we assign values to a variable
-```{r}
+```R
 a <- 5
 ```
 Here we assign 5 to the variable a, it is worth noting that `a=5` also works
@@ -145,7 +145,7 @@ To solve this issue, we just look at the error message in the console and debug
 
 Here is a slightly more complicated function
 
-```{r}
+```R
 h <- function(x){
   y <- 2 * x
   y ** 2 - x
@@ -257,7 +257,7 @@ The basic logic of using ChatGPT is called prompting, which is teaching AI here 
 
 Consider the following two functions:
 
-```{r}
+```R
 emo_state <- function(score){
   if(score >= 98){
     "Hooray"
@@ -269,7 +269,7 @@ emo_state <- function(score){
 }
 ```
 
-```{r}
+```R
 cat_emo_state <- function(score){
   if(score >= 98){
     cat("Hooray")
@@ -283,7 +283,7 @@ cat_emo_state <- function(score){
 
 The function `emo_state` *computes* a value, just like our functions `f` and `g` above. For example, `emo_state(99)` evaluates to `"Hooray!"`. You can see this in the following example:
 
-```{r}
+```R
 a <- emo.state(99)
 cat(a)
 ```
@@ -293,14 +293,14 @@ We first evaluated `emo.state(99)` and put it in `a`. Then we gave an instructio
 
 On the other hand, consider this piece of code:
 
-```{r}
+```R
 a <- cat_emo_state(99)
 ```
 > Hooray!  
 
 This already had the effect of printing an output to the screen. That's because when R sees `cat("Hooray")`, it outputs `Hooray` to the screen. But the value that the function computes, which is `cat("Hooray")` is not `"Hooray"`. In fact, it is
 
-```{r}
+```R
 a
 ```
 
