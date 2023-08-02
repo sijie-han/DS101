@@ -582,7 +582,8 @@ Now, we'll compute the same qunatities using pipes:
 5 %>% f %>% g 
 ```
 
-This is the same as computing `g(f(10))`. The way to think about it is this: we start with 10, then apply `f` to 10 and obtain `f(10)`, and then apply g to `10 %>% f` (i.e., `f(10)`) and obtain `f(g(10))`.
+This is the same as computing `g(f(10))`. The way to think about it is this: we start with 10, then apply `f` to 10 and obtain `f(10)`, and then apply g to `10 %>% f` (i.e., `f(10)`) and obtain `f(g(10))`.  
+The shortcut to use `%>%` is `command`+`shift`+`M`
 
 To compute `f(g(10))`, we can use:
 
