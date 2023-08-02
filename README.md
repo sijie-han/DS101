@@ -20,34 +20,34 @@
 ## Some Basic R 
 First, let's evaluate some R expressions in the console. The simplest expressions are numerics and strings:
 
-```R
+```{r}
 42
 ```
 
-```R
+```{r}
 "Hello"
 ```
 
 R simply repeats these values
 
 A more complex expression is something like `42 + 43`. Let's try this:
-```R
+```{r}
 42 + 43
 ```
 >85  
 
 R **evaluated** the expression and gave us the value back. We can evaluate more complex expressions too:
 
-```R
+```{r}
 (45 - 43) ** 3
 ```
 > 8
 ### We can also evaluate logical values
-```R
+```{r}
 5 == (4 + 1)
 ```
 >TRUE
-```R
+```{r}
 2**10 > 10**3
 ```
 >TRUE
@@ -56,12 +56,12 @@ R **evaluated** the expression and gave us the value back. We can evaluate more 
  TRUE,FALSE
 ```
 ### We can print out stuff using cat in R
-```R
+```{r}
 cat("Hi engsci!")
 ```
 > Hi engsci!
 ### Here's how we assign values to a variable
-```R
+```{r}
 a <- 5
 ```
 Here we assign 5 to the variable a, it is worth noting that `a=5` also works
@@ -145,7 +145,7 @@ To solve this issue, we just look at the error message in the console and debug
 
 Here is a slightly more complicated function
 
-```R
+```{r}
 h <- function(x){
   y <- 2 * x
   y ** 2 - x
@@ -257,7 +257,7 @@ The basic logic of using ChatGPT is called prompting, which is teaching AI here 
 
 Consider the following two functions:
 
-```R
+```{r}
 emo_state <- function(score){
   if(score >= 98){
     "Hooray"
@@ -269,7 +269,7 @@ emo_state <- function(score){
 }
 ```
 
-```R
+```{r}
 cat_emo_state <- function(score){
   if(score >= 98){
     cat("Hooray")
@@ -283,8 +283,8 @@ cat_emo_state <- function(score){
 
 The function `emo_state` *computes* a value, just like our functions `f` and `g` above. For example, `emo_state(99)` evaluates to `"Hooray!"`. You can see this in the following example:
 
-```R
-a <- emo_state(99)
+```{r}
+a <- emo.state(99)
 cat(a)
 ```
 > Hooray!
@@ -293,21 +293,21 @@ We first evaluated `emo.state(99)` and put it in `a`. Then we gave an instructio
 
 On the other hand, consider this piece of code:
 
-```R
+```{r}
 a <- cat_emo_state(99)
 ```
 > Hooray!  
 
 This already had the effect of printing an output to the screen. That's because when R sees `cat("Hooray")`, it outputs `Hooray` to the screen. But the value that the function computes, which is `cat("Hooray")` is not `"Hooray"`. In fact, it is
 
-```R
+```{r}
 a
 ```
 
 You will *very rarely* need to use `cat` inside functions. Outside of Precept 1, you just should not use it at all in this course.
 
 ## Vectors 
-### What is a vector in R?
+### What is a vecotr in R?
 A vector is an order collection of elements of the **same** type.  
 Here are examples of vectors in R.
 ```R
@@ -315,7 +315,7 @@ c(5,6,7)
 c("dog","cat")
 v <- c(TRUE,FALSE,TRUE,TRUE) 
 ```
-### Indexing value of elements in a vector
+### Retrieving value of elements in a vector
 We can access the value of elements in a vector by specifying the location of it.
 ```R
 v[1]
@@ -345,29 +345,7 @@ The `length` function gets the length of a vector. In this case, the output shou
 v <- c(2,-50,2,4)
 max(v)
 ```
-The `max` function gets the maxinum element of a vector. In this case, the output should be `4`.
-
-#### unique
-```R
-v <- c(2,-1,2,2,5,1)
-unique(v)
-```
-The `unique` function will return a vector with different values(i.e. Vector that does not contain any repetitive elements)
-
-> 2 -1  5  1
-
-#### Comparing a vector `v` and a number `n`
-example: v > n
-```R
-v <- c(2,-1,2)
-v > 0
-```
-> TRUE FALSE TRUE
-
-`v>n` will do logical operations for every element in v with n.
-
-
-
+The `max` function gets the maxinum element a vector. In this case, the output should be `4`.
 
 #### Example: How to define a function without using max?
 <details><summary>Answer
@@ -416,26 +394,25 @@ pie <- TRUE
 icecream <- FALSE
 pie | icecream
 ```
-> TRUE
+
 ```R
 pie <- FALSE
 icecream <- FALSE
 pie | icecream
 ```
-> FALSE
+
 
 ```R
 pie <- TRUE
 icecream <- FALSE
 pie & icecream
 ```
-> FALSE
+
 ```R
 pie <- TRUE
 icecream <- TRUE
 pie | icecream
 ```
-> TRUE
 
 Note: this is not quite how it works in English. If I say I will have pie or icecream, and then have both, that means what I said wasn't true. But for R, the expression `pie | icecream` is TRUE. Technically, `|` is called "inclusive OR" (as opposed to the "exclusive OR" we usually mean in English.)
 
@@ -445,18 +422,18 @@ pie <- FALSE
 icecream <- TRUE
 pie | icecream
 ```
-> TRUE
+
 ```R
 pie <- FALSE
 icecream <- FALSE
 pie | icecream
 ```
-> FALSE
+
 ```R
 pie <- TRUE
 !pie
 ```
-> FALSE
+
 ### Inclusive OR and exclusive OR (XOR)
 
 So how *do* you make an expression in R that corresponds to "I will have ice cream or pie"? That is, we want to write an expression that will be `TRUE` whenever `pie` or `icecream` are true, but not both.
@@ -475,6 +452,207 @@ v <- c(5, 2, -1, 1)
 v[v >= 0 & v<= 3 ]
 ```
 > 2 1
+
+# Lecture 4
+## Data frames
+
+
+
+
+Data frames are R's way of storing tables (note that the salary data we had was also actually a table). 
+
+
+### Defining your own data frames
+
+You can define a data frame using the following syntax:
+
+```R
+offers <- data.frame(amount = c(241, 590, 533),
+                     spec = c("family doc", "cardio" "ortho"))
+```
+
+Note the `amount` and `spec` are the names of *columns* in the new data frame. We define data frames column-by-column.
+
+
+The value of `offers` will be displayed as follows in the console:
+
+```R
+offers
+```
+
+Let's load a data frame (you must previously have successfully run `install.packages("babynames")`).
+
+```R
+library(babynames) #Load the data frame babynames into R
+```
+
+Here are the first several rows of the data frame
+
+```R
+head(babynames) # Display the first 5 rows of a data frame
+```
+
+We can access, for example, row 2 and column "year" of the table like so:
+
+```R
+babynames[2, "year"]
+```
+
+If we want to access all of row 2, we can omit the second part:
+
+```R
+babynames[2, ]
+```
+
+We can access rows 2 through 6 like so:
+
+```R
+babynames[2:6, ]
+```
+
+We can only take the columns `"n"` and `"year"`, like this:
+
+```R
+babynames[2:6, c("n", "year")]
+```
+
+Finally, if we want a particular column as a vector (rather than as a data frame), we can do the following (make sure to keep track of the quotes)
+
+```R
+babynames[5:20, ]$name
+```
+
+
+### A note about `$` vs. `[, "colname"]`
+
+Note that sometimes, `df[, "colname"]` will yield a vector (when you are operating on one kind of data frames), and sometimes, it will a data frame. `df$colname` will always yield a vector. So if you want a vector, use the `$` operator.
+
+## Working with data frames
+
+Let's now write code that finds the most common name in 1999
+
+```R
+babies_1999 <- babynames[babynames$year == 1999 & babynames$sex == "F", ]
+max_name_count <- max(babies.1999$n)
+(babies_1999$name)[max_name_count == babies_1999$n]
+```
+
+Let's make this into a more general function:
+
+```R
+most_common_name <- function(babynames, year, sex){
+  baby <- babynames[babynames$year == year & babynames$sex == sex,  ]
+  (baby$name)[baby$n == max(baby$n)]
+}
+```
+
+
+## Pipes and the `tidyverse`
+
+To use pipes, first you need to install and load the `tidyverse` library. Use the following:
+
+    install.packages("tidyverse")
+    library(tidyverse)
+
+
+```{r message = F}
+library(tidyverse)
+```
+
+### Composition of functions
+
+Let's define two functions:
+
+```R
+f <- function(x){
+  x^2
+}
+
+g <- function(y){
+  y + 1
+}
+```
+
+
+We can compute `f(g(5))` and `g(f(5))`. Note that those are not the same: $f(g(5)) = f(6) = 36$ but $g(f(5)) = g(25) = 26$.
+  
+Now, we'll compute the same qunatities using pipes:
+
+```R
+5 %>% f %>% g 
+```
+
+This is the same as computing `g(f(10))`. The way to think about it is this: we start with 10, then apply `f` to 10 and obtain `f(10)`, and then apply g to `10 %>% f` (i.e., `f(10)`) and obtain `f(g(10))`.
+
+To compute `f(g(10))`, we can use:
+
+```R               
+5 %>% g %>% f 
+```
+
+This is the same as 
+
+```R               
+5 %>% g() %>% f()
+```
+
+If the only thing that we're sending to `f` is `g(5)`, the parentheses are optional in this notation.
+
+This is useful mostly because it's easier to read something like `x %>% f1 %>% f2 %>% f3 %>% f4` than to read `f4(f3(f2(f1(x))))`.
+
+## Using `tidyverse`/`dplyr` to wrangle data
+
+### `filter`
+
+The `filter` function is used to select rows from a data frame. The following are all equivalent. They are different ways of selecting rows for which the `year` is 1880 **and** `sex` is `"F"`.
+
+
+`filter(babynames, year == 1880, sex == "F")`
+
+`idx <- (babynames$year == 1880) & (babynames$sex == "F")`
+`babynames[idx, ]`
+
+`babynames[(babynames$year == 1880) & (babynames$sex == "F"), ]`
+
+`babynames %>% filter(year == 1880 & sex == "F")`
+
+`babynames %>% filter(year == 1880, sex == "F")`
+
+The last way is probably preferable, though different people might have different preferences.
+
+### `select`
+
+We can use `select` as follows:
+
+```R
+b <- babynames %>% select(year, name)
+b[1:20, ]
+```
+
+We only kept the `year` and `name` columns here.
+
+### `summarise` and `group_by`
+
+First, let's use `summarise` to compute the average number of babies per name:
+
+```R
+babynames %>% summarise(pername = mean(n))
+```
+
+Inside of `summarise`, we can refer to columns in the data frame we are processing by name, without the `$` operator. (And you shouldn't be using the `$` operator.) This is basically the same as not using `summarise` and computing `mean(babynames$n)` -- not that interesting.
+
+The real power of `summarize` is in using `group_by` -- we can group rows and compute a function such as `mean` for every group of rows separately. For example, we could compute the average number of babies per name for different sexes separately.
+
+```R
+babynames %>% group_by(sex) %>% 
+              summarize(b.pername = mean(n))
+```
+
+We see that the number of babies per name for `"F"` is much smaller than for `"M"` -- female names are more diverse with fewer babies per name, and male names are less diverse with more babies per name.
+
+
+
+
 
 
    
