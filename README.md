@@ -607,18 +607,18 @@ This is useful mostly because it's easier to read something like `x %>% f1 %>% f
 
 The `filter` function is used to select rows from a data frame. The following are all equivalent. They are different ways of selecting rows for which the `year` is 1880 **and** `sex` is `"F"`.
 
+```R
+filter(babynames, year == 1880, sex == "F")
 
-`filter(babynames, year == 1880, sex == "F")`
+idx <- (babynames$year == 1880) & (babynames$sex == "F")
+babynames[idx, ]
 
-`idx <- (babynames$year == 1880) & (babynames$sex == "F")`
-`babynames[idx, ]`
+babynames[(babynames$year == 1880) & (babynames$sex == "F"), ]
 
-`babynames[(babynames$year == 1880) & (babynames$sex == "F"), ]`
+babynames %>% filter(year == 1880 & sex == "F")
 
-`babynames %>% filter(year == 1880 & sex == "F")`
-
-`babynames %>% filter(year == 1880, sex == "F")`
-
+babynames %>% filter(year == 1880, sex == "F")
+```
 The last way is probably preferable, though different people might have different preferences.
 
 ### `select`
@@ -646,14 +646,132 @@ The real power of `summarize` is in using `group_by` -- we can group rows and co
 
 ```R
 babynames %>% group_by(sex) %>% 
-              summarize(b.pername = mean(n))
+              summarise(b.pername = mean(n))
 ```
 
 We see that the number of babies per name for `"F"` is much smaller than for `"M"` -- female names are more diverse with fewer babies per name, and male names are less diverse with more babies per name.
 
+# Lecture 5
+- go through all the data wrangling tools that tidyverse provides
+- go through tracing of data wrangling
+## Data wrangling tools
+We've introduced `summarise` and `group_by` in the last lecture
+### filter
+
+The `filter` function is used to select rows from a data frame. The following are all equivalent. They are different ways of selecting rows for which the `year` is 1880 **and** `sex` is `"F"`.
+
+```R
+filter(babynames, year == 1880, sex == "F")
+
+idx <- (babynames$year == 1880) & (babynames$sex == "F")
+babynames[idx, ]
+
+babynames[(babynames$year == 1880) & (babynames$sex == "F"), ]
+
+babynames %>% filter(year == 1880 & sex == "F")
+
+babynames %>% filter(year == 1880, sex == "F")
+
+The last way is probably preferable, though different people might have different preferences.
+```
+### arrange
+
+`arrange`` is used to produce a data frame sorted in whatever way you want to specify. See what happens when you run
+
+```R 
+View(babynames %>% arrange(name))
+```
+
+The resultant data frame is sorted alphabetically by `name`. If you want to sort things in descending order, use
+```R
+`View(babynames %>% arrange(desc(name)))`
+```
+
+
+Note that, similarly to `filter` and other functions, this does not change `babynames`: it just produces a new data frame with the same contents, sorted in the way we specify. You can also sort by `year`, and then also sort by `name`, within the same year. Try running and viewing the following:
+
+`babynames %>% arrange(year, name)`
+
+#### diffenrence between `group_by` and `arrange`
+`group_by` is setting groups in the data frame while `arrange` is reordering it
+
+### select
+
+`select` is used to produce a data frame only with the specified columns (the columns are in the order that you specify):
+
+```R
+wanted <- babynames %>% select(year, sex, number)
+```
+now we store a chart with 3 columns year, sex and number to `wanted`
+
+
+
+### mutate
+
+Let's try to calculate GDP per capital(GDP divided by the population) in `gapminder``.
+
+
+We can use `mutate` to compute a new column:
+
+```R
+g_gdp <- gapminder %>% mutate(gdp = gdpPercap *pop/1000)
+```
+
+The share of world GDP for each country for each year
+```R
+g_gdp_share <- gapminder %>% group_by(year) %>% mutate(gdp_share =  gdpPercap* pop/sum(gdpPercap*pop) )
+```
+
+
+### distinct
+
+`dplyr`'s `distinct` is similar to the function `unique`, which we already saw, but it operates on data frames. It takes in a data frame, and returns all the distinct rows. That is, duplicate rows are not included in the returned data frame.
+
+Let's try this:
+
+```R
+b.total <- babynames %>% mutate(total_by_year = round(n/prop))
+b.total %>% select(sex, year, total_by_year) %>% distinct
+```
+
+What can you conclude from this?
+
+We can also give arguments to `distinct`. (For precise language fans: an *argument* is a value we pass to the function; a parameter is the *variable* we assign the argument to).
+
+```R
+babynames %>% distinct(year)
+```
+
+```R
+babynames %>% distinct(name, year)
+```
+
+Note that There are as many distinct combination of (name, year) as there are rows in `babynames`.
+
+## Tracing of data wrangling
+Suppose we want the largest life expectancy that each country achieved based on the data frame below.
+>| Country | lifeExp |
+>|--------|----|
+>|Canada|73.0|
+>|Canada|76.4|
+>|United States| 70.0|
+>|United States| 75.0|
+```R
+gapminder %>% group_by(country) %>% summarize(max_lifeExp = max(lifeExp))
+#trace:
+#--------------------------------------
+df <- data.frame(country = c("Canada", "USA" ),maxLifeExp = c(max(c(73,76.4)), max(c(70,75))))
+#-------------------------------
+df <- data.frame(country = c("Canada", "USA" ),maxLifeExp = c(76.4, 75))
+```
+The output is 
+>| Country | lifeExp |
+>|--------|----|
+>|Canada|76.4|
+>|United States| 75.0|
 
 
 
 
 
-   
+
